@@ -1,0 +1,134 @@
+<div class="container-fluid">
+    <h1 class="text-center my-3">{{title}}</h1>
+    <!-- Nav Tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="products-tab" data-toggle="tab" href="#products" role="tab"
+                aria-controls="products" aria-selected="true">Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users"
+                aria-selected="false">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders"
+                aria-selected="false">Orders</a>
+        </li>
+    </ul>
+    <!-- Tab Content -->
+    <div class="tab-content">
+        <!-- Products Tab -->
+        <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="products-tab">
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr>
+                        <td>{{this.name}}</td>
+                        <td>{{this.description}}</td>
+                        <td>${{this.price}}</td>
+                        <td>{{this.quantity}}</td>
+                        <td>
+                            <a href="/admin/product/edit/?flavor={{this.name}}"><button>Edit product</button></a>
+                            <a href="/admin/product/remove/?flavor={{this.name}}"><button>Remove product</button></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <a href="/admin/product/add/"><button>Add product</button></a>
+        </div>
+        <!-- Users Tab -->
+        <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Orders</th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr>
+                        <td>{{this.userId}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.email}}</td>
+                        <td>
+                            {{#each orders}}
+                            <li><a href="/admin/orders/edit/?id={{this}}">{{this}}</a></li>
+                            {{/each}}
+                        </td>
+                        <td><a href="/admin/users/edit/?id={{this.userId}}"><button>Edit user</button></a></td>
+                        <td><a href="/admin/users/remove/?id={{this.userId}}"><button>Remove user</button></a></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <a href="/admin/users/add/"><button>Add user</button></a>
+        </div>
+        <!-- Orders Tab -->
+        <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Products</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Location</th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+                        <td>{{this.userId}}</td>
+                        <td>{{this.orderId}}</td>
+                        <td>
+                            {{#each this.products}}
+                            <ul>
+                                <li>Flavor: {{this.productFlavor}}</li>
+                                <li>Unit Price: {{this.productPrice}}</li>
+                                <li>Quantity: {{this.quantity}}</li>
+                            </ul>
+                            {{/each}}
+                            <b>Total: ${{this.total}}</b>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>{{this.contact.name}}</li>
+                                <li>{{this.contact.email}}</li>
+                                <li>{{this.contact.phone}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>{{this.location.address}}</li>
+                                <li>{{this.location.city}}</li>
+                                <li>{{this.location.state}}</li>
+                                <li>{{this.location.zip}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="/admin/orders/edit/?id={{this._id}}"><button>Edit order</button></a>
+                            <a href="/admin/orders/cancel/?id={{this._id}}"><button>Cancel order</button></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <a href="/products"><button>Start an order</button></a>
+        </div>
+    </div>
+</div>

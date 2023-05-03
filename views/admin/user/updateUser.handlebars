@@ -1,0 +1,32 @@
+{{#if user}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="card mb-4 box-shadow h-100">
+                <div class="card-body row align-items-end m-0">
+                    <h4 class="card-title">{{user.name}}</h4>
+                    <form class="form-inline" action="/admin/user/update" method="post">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" class="form-control input-text mb-2 w-100" value="{{user.name}}">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" class="form-control input-text mb-2 w-100" value="{{user.email}}">
+                        <label for="password">Password:</label>
+                        <input type="text" name="password" class="form-control input-text mb-2 w-100" value="{{user.password}}">
+                        <input type="hidden" name="id" value="{{user._id}}">
+                        <div class="input-group-btn d-grid">
+                            <button type="submit" class="btn btn-primary">Update user</button>
+                            <a href="/admin/users/remove/?id={{user._id}}"><button class="btn btn-secondary">Remove user</button></a>
+                        </div>
+                    </form>
+                    <a href="/admin"><button class="btn btn-tertiary">Go back</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{else}}
+<p>
+    No user found
+</p>
+{{/if}}

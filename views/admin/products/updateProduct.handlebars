@@ -1,0 +1,38 @@
+{{#if product}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="card mb-4 box-shadow h-100">
+                <div class="card-body row align-items-end m-0">
+                    <h4 class="card-title">{{product.name}}</h4>
+                    <form class="form-inline" action="/admin/product/update" method="post">
+                        <label for="image">Image URL:</label>
+                        <input type="text" name="image" class="form-control input-text mb-2 w-100" value="{{product.image}}">
+                        <label for="imagealt">Image Alt Text:</label>
+                        <input type="text" name="imagealt" class="form-control input-text mb-2 w-100" value="{{product.imagealt}}">
+                        <label for="name">Flavor:</label>
+                        <input type="text" name="name" class="form-control input-text mb-2 w-100" value="{{product.name}}">
+                        <label for="description">Description:</label>
+                        <textarea name="description" class="form-control input-text mb-2 w-100">{{product.description}}</textarea>
+                        <label for="price">Price:</label>
+                        <input type="number" step=".01" name="price" class="form-control input-text mb-2 w-100" value="{{product.price}}">
+                        <label for="quantity">Stock/Qty:</label>
+                        <input type="number" name="quantity" class="form-control input-number mb-2 w-100" value="{{product.quantity}}" min="1"
+                                max="{{product.totalQuantity}}">
+                        <button type="submit" class="btn btn-primary">Update product</button>
+                    </form>
+                    <div class="input-group-btn d-grid mt-3">
+                        <a href="/admin/product/remove/?flavor={{product.name}}"><button class="btn btn-secondary">Remove product</button></a>
+                        <a href="/admin"><button class="btn btn-tertiary">Go back</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{else}}
+<p>
+    No Products found ... Add One!
+</p>
+{{/if}}

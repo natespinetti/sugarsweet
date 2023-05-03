@@ -1,0 +1,43 @@
+{{log data}}
+{{#if data}}
+<div class="container">
+    <h1>{{title}}</h1>
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each data.products}}
+                <tr>
+                    <td>{{this.productFlavor}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>${{this.productPrice}}</td>
+                    <td>
+                        <a href="/cart/edit?id={{this.productId}}">Update</a> |
+                        <a href="/cart/delete?id={{this.productId}}">Remove</a>
+                    </td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td/>
+                    <td/>
+                    <td>Total: ${{data.totalPrice}}</td>
+                </tr>
+            </tbody>
+        </table>
+    {{#if data.totalPrice}}
+    <a href="/checkout"><button>Checkout</button></a>
+    {{/if}}
+    </div>
+</div>
+{{else}}
+<p>
+    No items in cart <a href="/products">Add One!</a>
+</p>
+{{/if}}

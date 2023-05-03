@@ -1,0 +1,43 @@
+{{#if data}}
+<div class="container">
+    <h1>Search Results</h1>
+    <div class="row">
+        {{#each data}}
+        <div class="col-md-3">
+            <div class="card mb-4 box-shadow h-100">
+                <img class="card-img-top" src="{{this.image}}" alt="{{this.imagealt}}">
+                <div class="card-body row align-items-end m-0">
+                    <h4 class="card-title">{{this.name}}</h4>
+                    <p class="card-text">{{this.description}}</p>
+                    <h5 class="card-price">{{this.price}}</h5>
+                    <form class="form-inline d-block" action="/add-to-cart" method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="number" name="quantity" class="form-control input-number" value="1" min="1"
+                                    max="{{this.quantity}}">
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default btn-number" data-type="plus"
+                                        data-field="quantity">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <input type="hidden" name="productId" value="{{this.id}}">
+                        <input type="hidden" name="productPrice" value="{{this.price}}">
+                        <input type="hidden" name="productFlavor" value="{{this.name}}">
+                    </form>
+        
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+{{else}}
+<p>
+    No Products found ... <a href="/products">View all products!</a>
+</p>
+{{/if}}

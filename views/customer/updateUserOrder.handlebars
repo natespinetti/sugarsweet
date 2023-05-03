@@ -1,0 +1,34 @@
+{{#if order}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="card mb-4 box-shadow h-100">
+                <div class="card-body row align-items-end m-0">
+                    <h4 class="card-title">Order ID: {{order.orderId}}</h4>
+                    <h5 class="w-100">Products</h5>
+                    <form method="post" action="/orders/update/?orderId={{order.orderId}}">
+                        {{#each order.products}}
+                        <h6 class="w-100">{{this.productFlavor}}</h6>
+                        <label for="qty{{@index}}" class="w-100">Quantity:</label>
+                        <input type="number" class="mb-4 w-100" name="qty{{@index}}" value="{{this.quantity}}">
+                        <input type="hidden" name="productFlavor{{@index}}" value="{{this.productFlavor}}">
+                        {{/each}}
+                        <input type="hidden" name="id" value="{{order._id}}">
+                        <input type="hidden" name="userId" value="{{order.userId}}">
+                        <button type="submit" class="btn btn-primary">Update order</button>
+                    </form>
+                    <span class="input-group-btn d-grid mt-3">
+                        <a href="/admin/orders/cancel/?id={{order._id}}"><button class="btn btn-secondary">Cancel order</button></a>
+                        <a href="/orders/?id={{order.userId}}"><button class="btn btn-tertiary">Go back</button></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{else}}
+<p>
+    No Orders found!
+</p>
+{{/if}}

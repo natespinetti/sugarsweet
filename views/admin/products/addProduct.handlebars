@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="card mb-4 box-shadow h-100">
+                <div class="card-body row align-items-end m-0">
+                    <h4 class="card-title">{{title}}</h4>
+                    <form class="form-inline" action="/admin/product/added" method="post">
+                        <label for="image">Image URL:</label>
+                        <input type="text" name="image" class="form-control input-text mb-2 w-100">
+                        <label for="imagealt">Image Alt Text:</label>
+                        <input type="text" name="imagealt" class="form-control input-text mb-2 w-100">
+                        <label for="name">Flavor:</label>
+                        <input type="text" name="name" class="form-control input-text mb-2 w-100">
+                        <label for="description">Description:</label>
+                        <textarea name="description" class="form-control input-text mb-2 w-100"></textarea>
+                        <label for="price">Price:</label>
+                        <input type="text" name="price" class="form-control input-text mb-2 w-100">
+                        <label for="quantity">Stock/Qty:</label>
+                        <input type="number" name="quantity" class="form-control input-number mb-2 w-100" min="1">
+                        <div class="input-group-btn d-grid">
+                            <button type="submit" class="btn btn-primary">Add product</button>
+                        </div>
+                    </form>
+                    <a href="/admin"><button class="btn btn-secondary mt-3">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

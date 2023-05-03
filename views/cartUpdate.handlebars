@@ -1,0 +1,39 @@
+{{#if product}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4 box-shadow h-100">
+                <img class="card-img-top" src="{{product.image}}" alt="{{product.imagealt}}">
+                <div class="card-body row align-items-end m-0">
+                    <h4 class="card-title">{{product.name}}</h4>
+                    <p class="card-text">{{product.description}}</p>
+                    <h5 class="card-price">{{product.price}}</h5>
+                    <form class="form-inline" action="/update-cart" method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="number" name="quantity" class="form-control input-number" value="{{product.quantity}}" min="1"
+                                    max="{{product.totalQuantity}}">
+                                <button type="submit" class="btn btn-primary">Update Cart</button>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default btn-number" data-type="plus"
+                                        data-field="quantity">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <input type="hidden" name="productId" value="{{product.productID}}">
+                    </form>
+                    <a href="/cart"><button class="btn btn-secondary">Cancel</button></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{else}}
+<p>
+    No Products found ... Add One!
+</p>
+{{/if}}

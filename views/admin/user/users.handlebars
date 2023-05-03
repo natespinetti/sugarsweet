@@ -1,0 +1,34 @@
+{{#if data}}
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Orders</th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.userId}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td>
+                {{#each this.orders}}
+                <li><a href="/admin/orders/edit/?id={{this}}">{{this}}</a></li>
+                {{/each}}
+            </td>
+            <td><a href="/admin/users/edit/?id={{this.userId}}"><button>Edit user</button></a></td>
+            <td><a href="/admin/users/remove/?id={{this.userId}}"><button>Remove user</button></a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>
+    No users found
+</p>
+<a href="/admin/users/add/"><button>Add user</button></a>
+{{/if}}

@@ -1,0 +1,56 @@
+{{#if data}}
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">Products</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Location</th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.userId}}</td>
+            <td>{{this.orderId}}</td>
+            <td>
+                {{#each this.products}}
+                <ul>
+                    <li>Flavor: {{this.productFlavor}}</li>
+                    <li>Unit Price: {{this.productPrice}}</li>
+                    <li>Quantity: {{this.quantity}}</li>
+                </ul>
+                {{/each}}
+                <b>Total: ${{this.total}}</b>
+            </td>
+            <td>
+                <ul>
+                    <li>{{this.contact.name}}</li>
+                    <li>{{this.contact.email}}</li>
+                    <li>{{this.contact.phone}}</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li>{{this.location.address}}</li>
+                    <li>{{this.location.city}}</li>
+                    <li>{{this.location.state}}</li>
+                    <li>{{this.location.zip}}</li>
+                </ul>
+            </td>
+            <td>
+                <a href="/admin/orders/edit/?id={{this._id}}"><button>Edit order</button></a>
+                <a href="/admin/orders/cancel/?id={{this._id}}"><button>Cancel order</button></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>
+    No orders found
+</p>
+<a href="/products"><button>Start an order</button></a>
+{{/if}}

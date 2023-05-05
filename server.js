@@ -45,7 +45,8 @@ app.use(function(req, res) {
     res.render('404');
 });
 
-app.listen(4000, function(){
-  console.log('http://localhost:4000');
-});
+const port = process.env.PORT || 4000;
 
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
